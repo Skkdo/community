@@ -1,5 +1,6 @@
 package community.back.repository.entity;
 
+import community.back.service.dto.request.SignUpRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
@@ -27,9 +29,18 @@ public class User extends BaseEntity{
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Setter
     @Column(name = "nickname", nullable = false)
     private String nickname;
 
+    @Setter
     @Column(name = "profile_image", nullable = true)
     private String profileImage;
+
+    public User(SignUpRequestDto dto) {
+        this.email = dto.getEmail();
+        this.password = dto.getPassword();
+        this.nickname = dto.getNickname();
+        this.profileImage = null;
+    }
 }

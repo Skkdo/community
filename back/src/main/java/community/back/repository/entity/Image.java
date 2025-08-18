@@ -32,4 +32,11 @@ public class Image {
 
     @Column(name = "image", nullable = false)
     private String image;
+
+    public static Image from(Board board, String image) {
+        return Image.builder()
+                .board(board)
+                .image(image)
+                .build();
+    }
 }

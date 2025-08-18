@@ -1,5 +1,7 @@
 package community.back.repository.entity;
 
+import community.back.service.dto.request.PatchCommentRequestDto;
+import community.back.service.dto.request.PostCommentRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -44,4 +46,14 @@ public class Comment extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Comment parent;
+
+    public void patchComment(PatchCommentRequestDto dto){
+        this.content = dto.getContent();
+    }
+
+    public Comment(Board board, User user, PostCommentRequestDto dto){
+        this.content = dto.getContent();
+        this.writer = user;
+        this.board = board;
+    }
 }

@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Like {
+public class Favorite {
 
     @EmbeddedId
-    private LikeId id;
+    private FavoriteId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userEmail")
@@ -29,4 +29,9 @@ public class Like {
     @MapsId("boardId")
     @JoinColumn(name = "board_id", nullable = false)
     private Board board;
+
+    public Favorite(Board board, User user) {
+        this.user = user;
+        this.board = board;
+    }
 }

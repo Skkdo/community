@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class LikeId implements Serializable {
+public class FavoriteId implements Serializable {
     private String userEmail;
     private Long boardId;
 }

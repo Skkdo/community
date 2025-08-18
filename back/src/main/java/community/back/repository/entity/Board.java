@@ -1,5 +1,7 @@
 package community.back.repository.entity;
 
+import community.back.service.dto.request.PatchBoardRequestDto;
+import community.back.service.dto.request.PostBoardRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -68,5 +70,27 @@ public class Board extends BaseEntity{
 
     public void decreaseFavoriteCount() {
         this.favoriteCount--;
+    }
+
+    public static Board from(PostBoardRequestDto dto, User user) {
+        String titleImage = null;
+        if (!dto.getBoardImageList().isEmpty()) {
+            titleImage = dto.getBoardImageList().get(0);
+        }
+
+        return Board.builder()
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .titleImage(titleImage)
+                .favoriteCount(0)
+                .commentCount(0)
+                .viewCount(0)
+                .writer(user)
+                .build();
+    }
+
+    public void patchBoard(PatchBoardRequestDto dto) {
+        this.title = dto.getTitle();
+        this.content = dto.getContent();
     }
 }
