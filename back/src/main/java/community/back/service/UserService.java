@@ -1,4 +1,4 @@
-package community.back.service.query;
+package community.back.service;
 
 import community.back.common.ResponseCode;
 import community.back.exception.BusinessException;
@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
     private final UserRepository userRepository;
     private final UserUtil userUtil;

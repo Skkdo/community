@@ -1,4 +1,4 @@
-package community.back.service.query;
+package community.back.service;
 
 import community.back.common.ResponseCode;
 import community.back.exception.BusinessException;
@@ -17,6 +17,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class FileService {
     private final S3Client s3Client;
 

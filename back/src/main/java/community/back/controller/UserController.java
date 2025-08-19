@@ -3,16 +3,18 @@ package community.back.controller;
 import community.back.common.ResponseDto;
 import community.back.service.dto.request.SignInRequestDto;
 import community.back.service.dto.request.SignUpRequestDto;
-import community.back.service.query.UserService;
+import community.back.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,16 +37,27 @@ public class UserController {
 
     @PostMapping("/auth/sign-in")
     public ResponseEntity<ResponseDto> signIn(
-            @RequestBody @Valid SignInRequestDto requestBody,
-            HttpServletRequest servletRequest
+            @RequestBody @Valid SignInRequestDto requestBody
     ) {
         Authentication auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(requestBody.getEmail(), requestBody.getPassword())
         );
 
         SecurityContextHolder.getContext().setAuthentication(auth);
-        HttpSession session = servletRequest.getSession(true);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
         return ResponseEntity.ok().body(ResponseDto.success());
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<Map<String, Object>> test(
+            HttpServletRequest request,
+            Authentication authentication) {
+
+        Map<String, Object> status = new HashMap<>();
+        status.put("authenticated", authentication != null && authentication.isAuthenticated());
+        status.put("username", authentication != null ? authentication.getName() : null);
+        status.put("sessionId", request.getSession(false) != null ?
+                request.getSession().getId() : null);
+
+        return ResponseEntity.ok(status);
     }
 }

@@ -1,4 +1,4 @@
-package community.back.config;
+package community.back.config.securityUtil;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import community.back.common.ResponseCode;

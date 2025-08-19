@@ -1,4 +1,4 @@
-package community.back.config;
+package community.back.config.securityUtil;
 
 import community.back.common.ResponseCode;
 import community.back.exception.BusinessException;

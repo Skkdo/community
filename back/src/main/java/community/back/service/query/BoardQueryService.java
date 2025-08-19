@@ -6,6 +6,7 @@ import community.back.repository.BoardRepository;
 import community.back.repository.entity.Board;
 import community.back.repository.entity.Image;
 import community.back.repository.entity.User;
+import community.back.service.ImageService;
 import community.back.service.dto.response.GetBoardListResponseDto;
 import community.back.service.dto.response.GetBoardResponseDto;
 import community.back.service.util.UserUtil;
@@ -27,7 +28,6 @@ public class BoardQueryService {
     public GetBoardResponseDto getBoard(Long id) {
         Board board = boardRepository.findByIdWithWriter(id).orElseThrow(
                 () -> new BusinessException(ResponseCode.NOT_EXISTED_BOARD));
-        // TODO 조회수 증가 redis 로직 추가
         List<Image> imageList = imageService.findByBoardId(id);
         return new GetBoardResponseDto(board, imageList);
     }

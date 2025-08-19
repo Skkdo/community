@@ -3,7 +3,6 @@ package community.back.service.dto.item;
 import community.back.repository.entity.Board;
 import community.back.repository.entity.User;
 import java.time.LocalDateTime;
-import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

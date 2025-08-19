@@ -1,4 +1,4 @@
-package community.back.service.query;
+package community.back.service;
 
 import community.back.repository.FavoriteRepository;
 import community.back.repository.entity.Board;
@@ -13,11 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class FavoriteService {
     private final FavoriteRepository favoriteRepository;
     private final BoardUtil boardUtil;
     private final UserUtil userUtil;
 
+    @Transactional
     public void deleteByBoardId(Long boardId) {
         favoriteRepository.deleteByBoardId(boardId);
     }
@@ -29,7 +31,6 @@ public class FavoriteService {
         User user = userUtil.findByEmail(email);
 
         Optional<Favorite> optional = favoriteRepository.findByBoardIdAndUserEmail(boardId, email);
-        // TODO 좋아요 증가, 감소 redis 로직 추가
         if (optional.isEmpty()) {
             Favorite favorite = new Favorite(board, user);
             favoriteRepository.save(favorite);
