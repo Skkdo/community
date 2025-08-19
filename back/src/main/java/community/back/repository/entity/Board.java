@@ -25,7 +25,7 @@ import org.hibernate.annotations.SQLRestriction;
 @AllArgsConstructor
 @SQLRestriction("is_deleted = false")
 @SQLDelete(sql = "UPDATE board SET is_deleted = true WHERE id = ?")
-public class Board extends BaseEntity{
+public class Board extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,24 +54,6 @@ public class Board extends BaseEntity{
     @Column(name = "view_count", nullable = false)
     private int viewCount;
 
-    public void increaseViewCount() {
-        this.viewCount++;
-    }
-
-    public void increaseCommentCount() {
-        this.commentCount++;
-    }
-
-    public void decreaseCommentCount() {
-        this.commentCount--;
-    }
-
-    public void increaseFavoriteCount() {this.favoriteCount++;}
-
-    public void decreaseFavoriteCount() {
-        this.favoriteCount--;
-    }
-
     public static Board from(PostBoardRequestDto dto, User user) {
         String titleImage = null;
         if (!dto.getBoardImageList().isEmpty()) {
@@ -87,6 +69,22 @@ public class Board extends BaseEntity{
                 .viewCount(0)
                 .writer(user)
                 .build();
+    }
+
+    public void increaseCommentCount() {
+        this.commentCount++;
+    }
+
+    public void decreaseCommentCount() {
+        this.commentCount--;
+    }
+
+    public void increaseFavoriteCount() {
+        this.favoriteCount++;
+    }
+
+    public void decreaseFavoriteCount() {
+        this.favoriteCount--;
     }
 
     public void patchBoard(PatchBoardRequestDto dto) {

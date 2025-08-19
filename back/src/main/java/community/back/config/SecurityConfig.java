@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .authenticationProvider(customAuthenticationProvider)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/health", "/file/**", "/api/user/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/community/**", "/api/user/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/board/**", "/api/comment/**", "/api/user/**").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(HttpBasicConfigurer::disable)
                 .exceptionHandling(exceptionHandle -> exceptionHandle

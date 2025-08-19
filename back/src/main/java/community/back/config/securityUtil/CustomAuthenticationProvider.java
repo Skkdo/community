@@ -30,7 +30,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 throw new BusinessException(ResponseCode.SIGN_IN_FAIL);
             }
 
-            return new UsernamePasswordAuthenticationToken(userDetails, password);
+            return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
         } catch (BusinessException e) {
             throw e;
         } catch (Exception e) {

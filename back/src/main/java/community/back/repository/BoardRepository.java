@@ -29,6 +29,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     Page<Board> findLatestBoards(Pageable pageable);
 
     @Modifying
-    @Query("UPDATE board b SET b.viewCount = b.viewCount + :incrementCount WHERE b.id = :boardId")
+    @Query("UPDATE Board b SET b.viewCount = b.viewCount + :incrementCount WHERE b.id = :boardId")
     void updateViewCount(@Param("boardId") Long boardId, @Param("incrementCount") Long incrementCount);
 }
