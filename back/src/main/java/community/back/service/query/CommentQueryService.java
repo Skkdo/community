@@ -36,7 +36,7 @@ public class CommentQueryService {
     }
 
     public GetCommentListResponseDto getChildCommentList(Long parentCommentId, Pageable pageable) {
-        boardUtil.findById(parentCommentId);
+        findById(parentCommentId);
         Page<Comment> commentList = commentRepository.findByParentId(parentCommentId, pageable);
 
         return new GetCommentListResponseDto(commentList);

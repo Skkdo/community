@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class ViewCountService {
-    private static final String VIEW_COUNT_KEY = "board:view:";
-    private static final String VIEW_LOG_KEY = "board:view:log:";
+    private static final String VIEW_COUNT_KEY = "board:viewCount:";
+    private static final String VIEW_LOG_KEY = "board:viewLog:";
     private final RedisTemplate<String, Object> redisTemplate;
     private final BoardRepository boardRepository;
 
