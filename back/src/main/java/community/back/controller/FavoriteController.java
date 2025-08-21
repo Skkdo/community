@@ -5,7 +5,6 @@ import community.back.service.FavoriteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +19,9 @@ public class FavoriteController {
     @PutMapping("/{boardId}")
     public ResponseEntity<ResponseDto> putFavorite(
             @PathVariable("boardId") Long boardId,
-            @AuthenticationPrincipal User userDetails
+            @AuthenticationPrincipal(expression = "username") String email
     ) {
-        favoriteService.putFavorite(userDetails.getUsername(), boardId);
+        favoriteService.putFavorite(email, boardId);
         return ResponseEntity.ok().body(ResponseDto.success());
     }
 }

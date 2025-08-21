@@ -39,31 +39,26 @@ public class CommentCommandService {
         boardUtil.findById(boardId);
 
         Comment comment = commentQueryService.findById(commentId);
-        String commentWriterEmail = comment.getWriter().getEmail();
-        boolean isCommentWriter = commentWriterEmail.equals(email);
-        if (!isCommentWriter) {
-            throw new BusinessException(ResponseCode.NO_PERMISSION);
-        }
+        isWriter(email, comment.getWriter().getEmail());
 
         comment.patchComment(dto);
     }
 
     public void deleteComment(Long boardId, String email, Long commentId) {
-
         Board board = boardUtil.findById(boardId);
         userUtil.findByEmail(email);
         Comment comment = commentQueryService.findById(commentId);
 
-        String writerEmail = board.getWriter().getEmail();
-        String commentWriterEmail = comment.getWriter().getEmail();
-
-        boolean isWriter = writerEmail.equals(email);
-        boolean isCommentWriter = commentWriterEmail.equals(email);
-        if (!isWriter && !isCommentWriter) {
-            throw new BusinessException(ResponseCode.NO_PERMISSION);
-        }
+        isWriter(email, board.getWriter().getEmail());
+        isWriter(email, comment.getWriter().getEmail());
 
         commentRepository.delete(comment);
         board.decreaseCommentCount();
+    }
+
+    public void isWriter(String email, String writerEmail) {
+        if (!writerEmail.equals(email)) {
+            throw new BusinessException(ResponseCode.NO_PERMISSION);
+        }
     }
 }

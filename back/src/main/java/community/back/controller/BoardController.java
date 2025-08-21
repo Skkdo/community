@@ -16,7 +16,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,20 +73,20 @@ public class BoardController {
 
     @PostMapping("")
     public ResponseEntity<ResponseDto> postBoard(
-            @RequestBody @Valid PostBoardRequestDto requestBody,
-            @AuthenticationPrincipal User userDetails
+            @RequestBody @Valid PostBoardRequestDto requestDto,
+            @AuthenticationPrincipal(expression = "username") String email
     ) {
-        boardCommandService.postBoard(requestBody, userDetails.getUsername());
+        boardCommandService.postBoard(requestDto, email);
         return ResponseEntity.ok().body(ResponseDto.success());
     }
 
     @PatchMapping("/{boardId}")
     public ResponseEntity<ResponseDto> patchBoard(
             @PathVariable("boardId") Long boardId,
-            @AuthenticationPrincipal User userDetails,
+            @AuthenticationPrincipal(expression = "username") String email,
             @RequestBody @Valid PatchBoardRequestDto requestBody
     ) {
-        boardCommandService.patchBoard(requestBody, boardId, userDetails.getUsername());
+        boardCommandService.patchBoard(requestBody, boardId, email);
         return ResponseEntity.ok().body(ResponseDto.success());
     }
 
@@ -95,9 +94,9 @@ public class BoardController {
     @DeleteMapping("/{boardId}")
     public ResponseEntity<ResponseDto> deleteBoard(
             @PathVariable("boardId") Long boardId,
-            @AuthenticationPrincipal User userDetails
+            @AuthenticationPrincipal(expression = "username") String email
     ) {
-        boardCommandService.deleteBoard(boardId, userDetails.getUsername());
+        boardCommandService.deleteBoard(boardId, email);
         return ResponseEntity.ok().body(ResponseDto.success());
     }
 

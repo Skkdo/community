@@ -64,7 +64,7 @@ public class UserController {
     @PatchMapping("/nickname")
     public ResponseEntity<ResponseDto> patchNickname(
             @RequestBody @Valid PatchNicknameRequestDto requestBody,
-            @AuthenticationPrincipal String email
+            @AuthenticationPrincipal(expression = "username") String email
     ) {
         userService.patchNickname(email, requestBody);
         return ResponseEntity.ok(ResponseDto.success());
@@ -73,7 +73,7 @@ public class UserController {
     @PatchMapping("/profile-image")
     public ResponseEntity<ResponseDto> patchProfileImage(
             @RequestBody @Valid PatchProfileImageRequestDto requestBody,
-            @AuthenticationPrincipal String email
+            @AuthenticationPrincipal(expression = "username") String email
     ) {
         userService.patchProfileImage(email, requestBody);
         return ResponseEntity.ok(ResponseDto.success());

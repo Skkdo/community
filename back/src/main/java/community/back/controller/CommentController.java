@@ -13,7 +13,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -51,31 +50,31 @@ public class CommentController {
     @PostMapping("/{boardId}/comment")
     public ResponseEntity<ResponseDto> postComment(
             @PathVariable("boardId") Long boardId,
-            @AuthenticationPrincipal User userDetails,
+            @AuthenticationPrincipal(expression = "username") String email,
             @RequestBody @Valid PostCommentRequestDto dto
     ) {
-        commentCommandService.postComment(boardId, userDetails.getUsername(), dto);
+        commentCommandService.postComment(boardId, email, dto);
         return ResponseEntity.ok().body(ResponseDto.success());
     }
 
     @PatchMapping("{boardId}/{commentId}")
     public ResponseEntity<ResponseDto> patchComment(
-            @AuthenticationPrincipal User userDetails,
+            @AuthenticationPrincipal(expression = "username") String email,
             @PathVariable("boardId") Long boardId,
             @PathVariable("commentId") Long commentId,
             @RequestBody @Valid PatchCommentRequestDto dto
     ) {
-        commentCommandService.patchComment(boardId, commentId, userDetails.getUsername(), dto);
+        commentCommandService.patchComment(boardId, commentId, email, dto);
         return ResponseEntity.ok().body(ResponseDto.success());
     }
 
     @DeleteMapping("/{boardId}/{commentId}")
     public ResponseEntity<ResponseDto> deleteComment(
-            @AuthenticationPrincipal User userDetails,
+            @AuthenticationPrincipal(expression = "username") String email,
             @PathVariable("boardId") Long boardId,
             @PathVariable("commentId") Long commentId
     ) {
-        commentCommandService.deleteComment(boardId, userDetails.getUsername(), commentId);
+        commentCommandService.deleteComment(boardId, email, commentId);
         return ResponseEntity.ok(ResponseDto.success());
     }
 }

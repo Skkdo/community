@@ -44,11 +44,7 @@ public class BoardCommandService {
         Board board = boardUtil.findById(id);
         userUtil.findByEmail(email);
 
-        String writerEmail = board.getWriter().getEmail();
-        boolean isWriter = writerEmail.equals(email);
-        if (!isWriter) {
-            throw new BusinessException(ResponseCode.NO_PERMISSION);
-        }
+        isWriter(email, board.getWriter().getEmail());
 
         board.patchBoard(dto);
         boardRepository.save(board);
@@ -63,15 +59,17 @@ public class BoardCommandService {
         Board board = boardUtil.findById(id);
         userUtil.findByEmail(email);
 
-        String writerEmail = board.getWriter().getEmail();
-        boolean isWriter = writerEmail.equals(email);
-        if (!isWriter) {
-            throw new BusinessException(ResponseCode.NO_PERMISSION);
-        }
+        isWriter(email, board.getWriter().getEmail());
 
         imageService.deleteByBoardId(id);
         favoriteService.deleteByBoardId(id);
         commentService.deleteByBoardId(id);
         boardRepository.delete(board);
+    }
+
+    public void isWriter(String email, String writerEmail) {
+        if (!writerEmail.equals(email)) {
+            throw new BusinessException(ResponseCode.NO_PERMISSION);
+        }
     }
 }
