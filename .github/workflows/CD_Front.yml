@@ -1,0 +1,29 @@
+name : CI
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'front/**'
+env:
+  AWS_REGION: ap-northeast-2
+  AWS_S3_BUCKET: community-front-files
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: AWS credential 설정
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.CD_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.CD_SECRET_KEY }}
+
+      - name: S3에 업로드
+        run: aws s3 sync front/ s3://$AWS_S3_BUCKET/ --delete

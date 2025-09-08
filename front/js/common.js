@@ -1,4 +1,4 @@
-        const API_BASE_URL = 'http://localhost:8080';
+        const API_BASE_URL = 'community-alb-1159771291.ap-northeast-2.elb.amazonaws.com';
         const API_ENDPOINTS = {
             latestList: '/api/board/latest-list',
             post: '/api/board',
