@@ -59,7 +59,7 @@ public class SecurityConfig {
     @Bean
     protected CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(List.of("http://localhost:63342")); // S3/CloudFront 도메인
+        cfg.setAllowedOrigins(List.of("https://d3kn17cq6tzfa3.cloudfront.net")); // S3/CloudFront 도메인
         cfg.setAllowedMethods(List.of("*"));
         cfg.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-XSRF-TOKEN"));
         cfg.setAllowCredentials(true);
