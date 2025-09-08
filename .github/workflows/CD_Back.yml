@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'back/**'
+      - '.github/workflows/CD_Back.yml'
 
 env:
   AWS_REGION: ap-northeast-2
