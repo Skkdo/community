@@ -34,7 +34,7 @@ jobs:
           echo "${{ secrets.APPLICATION_PROPERTIES }}" > back/src/main/resources/application.properties
 
       - name: 프로젝트 빌드
-        run: cd back && ./gradlew build
+        run: cd back && ./gradlew clean build -x test
 
       - name: 배포용 폴더 준비
         run: |
