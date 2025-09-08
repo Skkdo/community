@@ -26,20 +26,20 @@ jobs:
           distribution: 'corretto'
 
       - name: gradlew에 실행 권한 부여
-        run: chmod +x ./gradlew
+        run: chmod +x back/gradlew
 
       - name: application.properties 생성
         run: |
-          echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.properties
+          echo "${{ secrets.APPLICATION_PROPERTIES }}" > back/src/main/resources/application.properties
 
       - name: 프로젝트 빌드
-        run: ./gradlew build
+        run: cd back && ./gradlew build
 
       - name: 배포용 폴더 준비
         run: |
           mkdir -p deploy
           cp appspec.yml deploy/
-          cp -r build/libs deploy/
+          cp -r back/build/libs deploy/
           cp -r scripts deploy/
 
       - name: AWS credential 설정
