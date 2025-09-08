@@ -30,6 +30,7 @@ jobs:
 
       - name: application.properties 생성
         run: |
+          mkdir -p back/src/main/resources
           echo "${{ secrets.APPLICATION_PROPERTIES }}" > back/src/main/resources/application.properties
 
       - name: 프로젝트 빌드
