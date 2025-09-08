@@ -12,8 +12,9 @@ env:
   AWS_CODE_DEPLOY_GROUP: cd-group
 
 jobs:
-  build-with-gradle:
-    runs-on: ubuntu-20.04
+  build:
+    runs-on: ubuntu-latest
+
     steps:
       - name: checkout
         uses: actions/checkout@v3
