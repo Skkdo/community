@@ -1,4 +1,4 @@
-        const API_BASE_URL = 'https://community-alb-1159771291.ap-northeast-2.elb.amazonaws.com';
+        const API_BASE_URL = 'https://cooom.click';
         const API_ENDPOINTS = {
             latestList: '/api/board/latest-list',
             post: '/api/board',

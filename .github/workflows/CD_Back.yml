@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    paths:
+      - 'back/**'
 
 env:
   AWS_REGION: ap-northeast-2
