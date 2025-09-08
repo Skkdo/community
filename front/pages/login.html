@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 - 커뮤니티</title>
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<a class="back-home" onclick="home()">← 홈으로</a>
+
+<div class="login-container">
+  <div class="logo-section">
+    <h1 class="logo">커뮤니티</h1>
+  </div>
+
+  <div id="alertMessage" class="alert"></div>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="email" class="form-label">이메일</label>
+      <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              placeholder="이메일을 입력하세요"
+              required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="form-label">비밀번호</label>
+      <div style="position: relative;">
+        <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-input"
+                placeholder="비밀번호를 입력하세요"
+                required
+        >
+        <button type="button" class="password-toggle" onclick="togglePassword()">
+          <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button type="submit" class="login-btn" id="loginBtn">
+      <span id="btnText">로그인</span>
+    </button>
+  </form>
+
+  <div class="divider">
+    <span>또는</span>
+  </div>
+
+  <div class="signup-link">
+    <p>계정이 없으신가요? <a id="signUpPage">회원가입</a></p>
+  </div>
+</div>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+</div>
+<script src ="../js/common.js"></script>
+<script src ="../js/login.js"></script>
+</body>
+</html>

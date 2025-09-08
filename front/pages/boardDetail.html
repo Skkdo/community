@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세 - 커뮤니티</title>
+    <link rel="stylesheet" href="../css/boardDetail.css">
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <a href="javascript:history.back()" class="back-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+                뒤로가기
+            </a>
+            <a class="logo" onclick="home()">커뮤니티</a>
+            <div class="auth-section" id="authSection">
+                <a href="#" class="auth-btn" id="loginPage">로그인</a>
+                <a href="#" class="auth-btn signup" id="signUpPage">회원가입</a>
+            </div>
+            <div class="myPage-section" id = "myPageSection" onclick="myPage()">
+                <img src="" alt="작성자" class="user-avatar" id="userAvatar">
+                <div class="user-nickname" id="userNickname">작성자</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="main-content">
+    <div class="container">
+        <div id="postContainer" style="display: block;">
+            <div class="post-container">
+                <div class="post-header">
+                    <div class="post-meta">
+                        <div class="post-number" id="postNumber">#1</div>
+                        <div class="post-actions">
+                            <button class="action-btn" onclick="editPost()">수정</button>
+                            <button class="action-btn danger" onclick="deletePost()">삭제</button>
+                        </div>
+                    </div>
+
+                    <h1 class="post-title" id="postTitle">게시글 제목</h1>
+
+                    <div class="author-section">
+                        <img src="" alt="작성자" class="author-avatar" id="authorAvatar">
+                        <div class="author-info">
+                            <div class="author-name" id="authorName">작성자</div>
+                            <div class="post-date" id="postDate">2024년 1월 1일</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-content">
+                    <div class="post-images" id="postImages" style="display: none;">
+                        <!-- 이미지들이 여기에 동적으로 추가됩니다 -->
+                    </div>
+                    <div class="post-text" id="postContent">게시글 내용이 여기에 표시됩니다.</div>
+                </div>
+
+                <div class="post-footer">
+                    <div class="interaction-buttons">
+                        <button class="interact-btn" id="likeBtn" onclick="toggleLike()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <span id="likeText">좋아요</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comments-section">
+                <div class="comments-header">
+                    <h3 class="comments-title">댓글</h3>
+                </div>
+
+                <!-- 댓글 작성폼 -->
+                <div class="comment-form">
+                    <textarea
+                            class="comment-input"
+                            placeholder="댓글을 작성해주세요..."
+                            id="commentInput"
+                            maxlength="1000"
+                    ></textarea>
+                    <div class="comment-form-footer">
+                        <div class="comment-info">
+                            <span id="commentLength">0</span>/1000
+                        </div>
+                        <button class="comment-submit" onclick="submitComment()" id="commentSubmitBtn">
+                            댓글 작성
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 댓글 리스트 -->
+                <div class="comments-list" id="commentsList">
+                    <!-- JS에서 동적으로 댓글 추가 -->
+                </div>
+
+                <!-- 댓글 더보기 버튼 -->
+                <div style="text-align: center; margin: 10px 0;">
+                    <button id="loadMoreCommentsBtn" onclick="loadMoreComments()" style="display: none;">
+                        더 보기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- 이미지 모달 (기존 코드 유지) -->
+<div class="image-modal" id="imageModal">
+    <div class="modal-content">
+        <button class="modal-close" onclick="closeImageModal()">×</button>
+        <button class="modal-nav prev" id="prevBtn" onclick="showPrevImage()">‹</button>
+        <img src="" alt="확대된 이미지" class="modal-image" id="modalImage">
+        <button class="modal-nav next" id="nextBtn" onclick="showNextImage()">›</button>
+        <div class="modal-indicator" id="modalIndicator">1 / 1</div>
+    </div>
+</div>
+<script src="../js/common.js"></script>
+<script src="../js/boardDetail.js"></script>
+</body>
+</html>

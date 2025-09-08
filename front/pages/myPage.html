@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>마이페이지 - 커뮤니티</title>
+  <link href="../css/myPage.css" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <a class="logo" onclick="home()">커뮤니티</a>
+      <button class="btn create-post-btn" onclick="goToWritePage()">글 작성하기</button>
+    </div>
+  </div>
+</header>
+
+<main class="main-content">
+  <div class="container">
+    <h1 class="page-title">마이페이지</h1>
+
+    <div class="profile-section">
+      <div class="profile-header">
+        <div class="profile-avatar-container" onclick="document.getElementById('avatarInput').click()">
+          <img alt="프로필 이미지" class="profile-avatar" id="profileAvatar">
+          <div class="avatar-overlay">
+            <span>이미지 변경</span>
+          </div>
+          <input accept="image/*" id="avatarInput" onchange="handleAvatarChange(event)" type="file">
+        </div>
+        <div class="profile-info">
+          <h2 id="profileNickname" onclick="enableNicknameEdit()">사용자</h2>
+          <input id="nicknameInput" onblur="saveNickname()" onkeydown="if(event.key==='Enter') saveNickname()" style="display:none;" type="text">
+        </div>
+      </div>
+    </div>
+
+    <div class="posts-section">
+      <h2 class="section-title">
+        <svg class="stat-icon" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+        </svg>
+        내가 작성한 게시글
+      </h2>
+      <div class="post-list" id="myPostsList">
+        <!-- 샘플 게시글들 -->
+      </div>
+      <div class="pagination" id="pagination" style="display: none;">
+        <!-- 페이징 버튼이 여기에 동적으로 추가됩니다 -->
+      </div>
+    </div>
+  </div>
+</main>
+<script src ="../js/common.js"></script>
+<script src ="../js/myPage.js"></script>
+</body>
+</html>
