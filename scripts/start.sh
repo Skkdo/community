@@ -1,16 +1,13 @@
 #!/bin/bash
 
-ROOT_PATH="/root/community"
-JAR="$ROOT_PATH/application.jar"
+ROOT_PATH="/root/community/libs"
+JAR="$ROOT_PATH/back-0.0.1-SNAPSHOT.jar"
 
 APP_LOG="$ROOT_PATH/application.log"
 ERROR_LOG="$ROOT_PATH/error.log"
 START_LOG="$ROOT_PATH/start.log"
 
 NOW=$(date +%c)
-
-echo "[$NOW] $JAR 복사" >> $START_LOG
-cp $ROOT_PATH/libs/back-0.0.1-SNAPSHOT.jar $JAR
 
 echo "[$NOW] > $JAR 실행" >> $START_LOG
 nohup java -jar -Duser.timezone=Asia/Seoul $JAR > $APP_LOG 2> $ERROR_LOG &
