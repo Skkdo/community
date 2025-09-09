@@ -3,11 +3,11 @@ os: linux
 
 files:
   - source:  /
-    destination: /home/ubuntu/community
+    destination: /root/community
     overwrite: yes
 
 permissions:
-  - object: /
+  - object: /root/community
     owner: root
     group: root
 
